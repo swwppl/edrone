@@ -13,7 +13,7 @@ set_error_handler(
 
 set_exception_handler(
     function ($e) {
-        echo "Exception : {$e->getMessage()}" . PHP_EOL;
+        echo "Exception2 : {$e->getMessage()}" . PHP_EOL;
     }
 );
 
