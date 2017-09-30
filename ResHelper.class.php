@@ -43,6 +43,14 @@ class ResHelper
         $ch = null;
 
         try {
+            if(self::$lastException) {
+                throw self::$lastException;
+            }
+
+            if(!function_exists('curl_init')) {
+                throw new \ErrorException('CURL curl_init not exist.');
+            }
+
             array_filter(
                 $data,
                 function ($value) use (&$ch, $settings) {
