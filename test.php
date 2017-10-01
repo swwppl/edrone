@@ -17,10 +17,15 @@ set_exception_handler(
     }
 );
 
+function require_once_load($include_file, array $extra = [])
+{
+    require_once($include_file);
+}
+
 (function (array $includes = []) {
-    foreach ($includes as $include) {
+    foreach ($includes as &$include) {
         if (file_exists($include) && is_readable($include)) {
-            require_once $include;
+            require_once_load($include);
         } else {
             throw new \ErrorException("Exception: Include file {$include} does not exists or is not readable.");
         }
