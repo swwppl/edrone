@@ -51,15 +51,16 @@ class ResHelper
                 throw new \ErrorException('CURL curl_init not exist.');
             }
 
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $settings['action']);
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_NOBODY, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, true);
+
             array_filter(
                 $data,
                 function ($value) use (&$ch, $settings) {
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, $settings['action']);
-                    curl_setopt($ch, CURLOPT_HEADER, false);
-                    curl_setopt($ch, CURLOPT_NOBODY, true);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_POST, true);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, $value);
                     curl_exec($ch);
 
